@@ -282,3 +282,247 @@ const numOfOccurs = (str) => {
 	}
 	return result
 }
+
+// Output: 2
+const problem_18 = document.getElementById('problem18__input')
+const problem_18_2 = document.getElementById('problem18__input2')
+const btn_18 = document.getElementById('btn__18')
+const answer_18 = document.getElementById('answer__18')
+btn_18.addEventListener('click', () => {
+	// answer_18.innerHTML = binarySearch(problem_18.value, problem_18_2.value)
+	const arr = [...problem_18.value.split(',')]
+		.map((a) => parseInt(a))
+		.sort((a, b) => a - b)
+
+	const value = parseInt(problem_18_2.value)
+	answer_18.innerHTML = 'index: ' + binarySearch(arr, value)
+	console.log('clicked')
+})
+
+const binarySearch = (arr, value) => {
+	let start = 0
+	let end = arr.length - 1
+
+	while (start <= end) {
+		let mid = Math.floor((start + end) / 2)
+
+		if (arr[mid] === value) {
+			return mid
+		} else if (arr[mid] < value) {
+			start = mid + 1
+		} else {
+			end = mid - 1
+		}
+	}
+
+	return -1 // value not found
+}
+
+const problem_19 = document.getElementById('problem19__input')
+const problem_19_2 = document.getElementById('problem19__input2')
+const btn_19 = document.getElementById('btn__19')
+const answer_19 = document.getElementById('answer__19')
+btn_19.addEventListener('click', () => {
+	let arr = [...problem_19.value.split(',')].map((num) => parseInt(num))
+	let value = parseInt(problem_19_2.value)
+	answer_19.innerHTML = filterLargerNumber(arr, value)
+	console.log('clicked')
+})
+
+const filterLargerNumber = (arr, num) => {
+	return arr.filter((a) => parseInt(a) > num)
+}
+
+const sampleChars =
+	'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+
+const problem_20 = document.getElementById('problem20__input')
+const btn_20 = document.getElementById('btn__20')
+const answer_20 = document.getElementById('answer__20')
+btn_20.addEventListener('click', () => {
+	const length = parseInt(problem_20.value)
+	answer_20.innerHTML = randomString(length, sampleChars)
+	console.log('clicked')
+})
+
+const randomString = (length, chars) => {
+	let result = ''
+	for (let i = 0; i < length; i++) {
+		result += chars[Math.floor(Math.random() * chars.length)]
+	}
+	return result
+}
+
+const problem_21 = document.getElementById('problem21__input')
+const problem_21_2 = document.getElementById('problem21__input2')
+const btn_21 = document.getElementById('btn__21')
+const answer_21 = document.getElementById('answer__21')
+btn_21.addEventListener('click', () => {
+	const array = [...problem_21.value.split(',')].map((a) => parseInt(a))
+	const length = parseInt(problem_21_2.value)
+	const result = subSets(array, length)
+	answer_21.innerHTML = result.map((a) => a.join(', ')).join('<br>')
+	console.log('clicked')
+})
+
+const subSets = (arr, length) => {
+	let result = []
+
+	const recurse = (start, subset) => {
+		if (subset.length === length) {
+			result.push(subset)
+		} else {
+			for (let i = start; i < arr.length; i++) {
+				recurse(i + 1, subset.concat(arr[i]))
+			}
+		}
+	}
+
+	recurse(0, [])
+	console.log(result)
+	return result
+}
+
+const problem_22 = document.getElementById('problem22__input')
+const problem_22_2 = document.getElementById('problem22__input2')
+const btn_22 = document.getElementById('btn__22')
+const answer_22 = document.getElementById('answer__22')
+btn_22.addEventListener('click', () => {
+	answer_22.innerHTML = charOccurrences(problem_22.value, problem_22_2.value)
+	console.log('clicked')
+})
+const charOccurrences = (str, char) => {
+	let count = 0
+	for (let c of str) {
+		if (c === char) count++
+	}
+	return count
+}
+
+const problem_23 = document.getElementById('problem23__input')
+const btn_23 = document.getElementById('btn__23')
+const answer_23 = document.getElementById('answer__23')
+btn_23.addEventListener('click', () => {
+	answer_23.innerHTML = firstNoneRepeatChar(problem_23.value)
+	console.log('clicked')
+})
+const firstNoneRepeatChar = (str) => {
+	let result = ''
+	for (let i = 0; i < str.length; i++) {
+		if (str.indexOf(str[i]) === str.lastIndexOf(str[i])) {
+			result = str[i]
+			break
+		}
+	}
+	return result
+}
+const problem_24 = document.getElementById('problem24__input')
+const btn_24 = document.getElementById('btn__24')
+const answer_24 = document.getElementById('answer__24')
+btn_24.addEventListener('click', () => {
+	answer_24.innerHTML = bubbleSort(problem_24.value)
+	console.log('clicked')
+})
+const bubbleSort = (str) => {
+	let result = [...str.split(',')].map((a) => parseInt(a))
+	for (let i = 0; i < result.length; i++) {
+		for (let j = 0; j < result.length - i - 1; j++) {
+			if (result[j] < result[j + 1]) {
+				let temp = result[j]
+				result[j] = result[j + 1]
+				result[j + 1] = temp
+			}
+		}
+	}
+	return result.join(', ')
+}
+
+const problem_25 = document.getElementById('problem25__input')
+const btn_25 = document.getElementById('btn__25')
+const answer_25 = document.getElementById('answer__25')
+btn_25.addEventListener('click', () => {
+	answer_25.innerHTML = longestName(problem_25.value)
+	console.log('clicked')
+})
+const longestName = (str) => {
+	let result = ''
+	for (let name of str.split(',')) {
+		if (name.length > result.length) result = name
+	}
+	return result
+}
+const problem_26 = document.getElementById('problem26__input')
+const btn_26 = document.getElementById('btn__26')
+const answer_26 = document.getElementById('answer__26')
+btn_26.addEventListener('click', () => {
+	answer_26.innerHTML = longestSubstring(problem_26.value)
+	console.log('clicked')
+})
+const longestSubstring = (str) => {
+	let longestSubstring = ''
+	let currentSubstring = ''
+
+	for (let i = 0; i < str.length; i++) {
+		const index = currentSubstring.indexOf(str[i])
+
+		if (index !== -1) {
+			currentSubstring = currentSubstring.slice(index + 1)
+		}
+
+		currentSubstring += str[i]
+
+		if (currentSubstring.length > longestSubstring.length) {
+			longestSubstring = currentSubstring
+		}
+	}
+
+	return longestSubstring
+}
+const problem_27 = document.getElementById('problem27__input')
+const btn_27 = document.getElementById('btn__27')
+const answer_27 = document.getElementById('answer__27')
+btn_27.addEventListener('click', () => {
+	answer_27.innerHTML = longestPalindromeInString(problem_27.value)
+	console.log('clicked')
+})
+const longestPalindromeInString = (str) => {
+	let longestPalindrome = ''
+
+	for (let i = 0; i < str.length; i++) {
+		for (let j = i; j < str.length; j++) {
+			const substring = str.slice(i, j + 1)
+
+			if (
+				isPalindrome(substring) &&
+				substring.length > longestPalindrome.length
+			) {
+				longestPalindrome = substring
+			}
+		}
+	}
+
+	return longestPalindrome
+}
+
+const callback = (func) => {
+	func()
+}
+const btn_28 = document.getElementById('btn__28')
+const answer_28 = document.getElementById('answer__28')
+btn_28.addEventListener('click', () => {
+	callback(sampleFunction)
+	console.log('clicked')
+})
+const sampleFunction = () => {
+	answer_28.innerHTML += 'sample function called <br>'
+}
+
+const btn_29 = document.getElementById('btn__29')
+const answer_29 = document.getElementById('answer__29')
+btn_29.addEventListener('click', () => {
+	answer_29.innerHTML = getFunctionName(sampleFunction)
+	console.log('clicked')
+})
+const getFunctionName = (func) => {
+	return func.name
+}
