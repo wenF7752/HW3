@@ -189,6 +189,7 @@ const perfectNumber = (num) => {
 	}
 	return sum === number && number !== 0
 }
+
 const problem_13 = document.getElementById('problem13__input')
 const btn_13 = document.getElementById('btn__13')
 const answer_13 = document.getElementById('answer__13')
@@ -196,11 +197,87 @@ btn_13.addEventListener('click', () => {
 	answer_13.innerHTML = factorsOfPositiveInt(problem_13.value)
 	console.log('clicked')
 })
+
 const factorsOfPositiveInt = (num) => {
 	let result = []
 	for (let i = 1; i <= num; i++) {
 		if (num % i === 0) {
 			result.push(i)
+		}
+	}
+
+	return result
+}
+
+const problem_14 = document.getElementById('problem14__input')
+const problem_14_2 = document.getElementById('problem14__input2')
+const btn_14 = document.getElementById('btn__14')
+const answer_14 = document.getElementById('answer__14')
+btn_14.addEventListener('click', () => {
+	answer_14.innerHTML = coins(problem_14.value, problem_14_2.value)
+	console.log('clicked')
+})
+
+const coins = (amount, coinsArray) => {
+	let result = []
+	let coins = [...coinsArray.split(',')].map((coin) => parseInt(coin))
+	coins = coins.sort((a, b) => b - a)
+	for (let coin of coins) {
+		while (amount >= coin) {
+			result.push(coin)
+			amount -= coin
+		}
+	}
+	return result
+}
+
+const problem_15 = document.getElementById('problem15__input')
+const problem_15_2 = document.getElementById('problem15__input2')
+const btn_15 = document.getElementById('btn__15')
+const answer_15 = document.getElementById('answer__15')
+btn_15.addEventListener('click', () => {
+	answer_15.innerHTML = exp(problem_15.value, problem_15_2.value)
+	console.log('clicked')
+})
+
+const exp = (base, exponent) => {
+	return base ** exponent
+}
+
+const problem_16 = document.getElementById('problem16__input')
+const btn_16 = document.getElementById('btn__16')
+const answer_16 = document.getElementById('answer__16')
+btn_16.addEventListener('click', () => {
+	answer_16.innerHTML = uniqueChars(problem_16.value)
+	console.log('clicked')
+})
+const uniqueChars = (str) => {
+	let result = []
+	for (let char of str) {
+		if (!result.includes(char)) result.push(char)
+	}
+	return result.join('')
+}
+
+const problem_17 = document.getElementById('problem17__input')
+const btn_17 = document.getElementById('btn__17')
+const answer_17 = document.getElementById('answer__17')
+btn_17.addEventListener('click', () => {
+	const obj = numOfOccurs(problem_17.value)
+	answer_17.innerHTML = ''
+	// answer_17.innerHTML = obj.key.map(() => `${obj.key}: ${key.value}`)
+	for (const key in obj) {
+		answer_17.innerHTML += `${key}: ${obj[key]}<br>`
+	}
+	console.log('clicked')
+})
+const numOfOccurs = (str) => {
+	let result = {}
+	for (let char of str) {
+		if (result[char]) {
+			result[char]++
+		} else {
+			result[char] = 1
 		}
 	}
 	return result
